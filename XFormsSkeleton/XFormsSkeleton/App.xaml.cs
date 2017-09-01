@@ -1,4 +1,6 @@
 ﻿using Xamarin.Forms;
+using XFormsSkeleton.ViewModels;
+using XFormsSkeleton.Views;
 
 namespace XFormsSkeleton
 {
@@ -7,8 +9,17 @@ namespace XFormsSkeleton
         public App()
         {
             InitializeComponent();
+            ServiceLocator.RegisterDependencies();
 
-            MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage(new ViewD());
+        }
+
+        protected override async void OnStart()
+        {
+            base.OnStart();
+
+            var navService = ServiceLocator.Resolve<INavigationService>();//new NavigationService();
+            await navService.NavigateToAsync<MainViewModel>();
         }
     }
 }

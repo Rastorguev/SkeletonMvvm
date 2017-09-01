@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using Xamarin.Forms;
 
-namespace XFormsSkeleton
+namespace XFormsSkeleton.Views
 {
-    public abstract partial class SimplePage : ContentPage
+    public abstract partial class SimpleView : ContentPage
     {
-        protected SimplePage()
+        protected SimpleView()
         {
             InitializeComponent();
 
@@ -29,18 +29,18 @@ namespace XFormsSkeleton
         }
     }
 
-    public class MainPage : SimplePage
+    public class MainView : SimpleView
     {
         public override void Navigate()
         {
-            var pageA = new PageA();
-            pageA.Init("test");
+            var ViewA = new ViewA();
+            ViewA.Init("test");
 
-            Navigation.PushAsync(pageA);
+            Navigation.PushAsync(ViewA);
         }
     }
 
-    public class PageA : SimplePage
+    public class ViewA : SimpleView
     {
         private string _id;
 
@@ -69,35 +69,35 @@ namespace XFormsSkeleton
 
         public override void Navigate()
         {
-            Navigation.PushModalAsync(new NavigationPage(new PageB()));
+            Navigation.PushModalAsync(new NavigationPage(new ViewB()));
         }
     }
 
-    public class PageB : SimplePage
+    public class ViewB : SimpleView
     {
         public override void Navigate()
         {
-           Navigation.PushModalAsync(new PageC());
+           Navigation.PushModalAsync(new ViewC());
         }
     }
 
-    public class PageC: SimplePage
+    public class ViewC: SimpleView
     {
         public override void Navigate()
         {
-            Navigation.PushModalAsync(new PageD());
+            Navigation.PushModalAsync(new ViewD());
         }
     }
 
-    public class PageD : SimplePage
+    public class ViewD : SimpleView
     {
         public override void Navigate()
         {
-            //Navigation.PushAsync(new NavigationPage(new PageE()));
+            //Navigation.PushAsync(new NavigationView(new ViewE()));
         }
     }
 
-    public class PageE : SimplePage
+    public class ViewE : SimpleView
     {
         public override void Navigate()
         {
