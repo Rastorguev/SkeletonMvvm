@@ -9,23 +9,32 @@ namespace XFormsSkeleton
 {
     public interface INavigationService
     {
-        Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;
+        Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel<object>;
+
+        Task NavigateToAsync<TViewModel, TNavData>(TNavData navData) where TViewModel : BaseViewModel<TNavData>;
     }
 
     public class NavigationService : INavigationService
     {
         public NavigationPage MainNavPage => Application.Current.MainPage as NavigationPage;
 
-        public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
+        public Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel<object>
         {
-            return InternalNavigateToAsync(typeof(TViewModel), null);
+            return InternalNavigateToAsync<TViewModel, object>(null);
         }
 
-        private async Task InternalNavigateToAsync(Type viewModelType, object parameter)
+        public Task NavigateToAsync<TViewModel, TNavData>(TNavData navData) where TViewModel : BaseViewModel<TNavData>
         {
-            var viewModel = Activator.CreateInstance(viewModelType);
+            return InternalNavigateToAsync<TViewModel, TNavData>(navData);
+        }
 
-            var page = CreatePage(viewModelType, parameter);
+        private async Task InternalNavigateToAsync<TViewModel, TNavData>(TNavData navData)
+            where TViewModel : BaseViewModel<TNavData>
+        {
+            var viewModelType = typeof(TViewModel);
+            var viewModel = ServiceLocator.Resolve<TViewModel>();
+
+            var page = CreatePage(viewModelType);
             page.BindingContext = viewModel;
 
             if (Application.Current.MainPage == null)
@@ -34,9 +43,10 @@ namespace XFormsSkeleton
             }
 
             await MainNavPage.PushAsync(page);
+            await viewModel.InitAsync(navData);
         }
 
-        private static Page CreatePage(Type viewModelType, object parameter)
+        private static Page CreatePage(Type viewModelType)
         {
             var pageType = GetPageTypeForViewModel(viewModelType);
             if (pageType == null)

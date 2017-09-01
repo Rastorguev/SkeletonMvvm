@@ -1,4 +1,7 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
+using Autofac.Features.ResolveAnything;
+using XFormsSkeleton.ViewModels;
 
 namespace XFormsSkeleton
 {
@@ -11,6 +14,7 @@ namespace XFormsSkeleton
             var builder = new ContainerBuilder();
 
             builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
+            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
 
             _container?.Dispose();
             _container = builder.Build();

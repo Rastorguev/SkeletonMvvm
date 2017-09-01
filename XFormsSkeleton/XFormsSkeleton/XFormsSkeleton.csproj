@@ -45,7 +45,7 @@
     <Compile Include="Views\SimpleView.xaml.cs">
       <DependentUpon>SimpleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

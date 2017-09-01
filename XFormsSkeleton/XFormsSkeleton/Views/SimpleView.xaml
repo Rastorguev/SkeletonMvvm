@@ -8,7 +8,7 @@
         VerticalOptions="Center"
         HorizontalOptions="Center">
         <Button
-            Clicked="NavButton_OnClicked"
+            Command="{Binding NavigateCommand}"
             Text="Next"
             VerticalOptions="Center"
             HorizontalOptions="Center" />

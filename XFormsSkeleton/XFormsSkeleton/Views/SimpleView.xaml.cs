@@ -33,14 +33,14 @@ namespace XFormsSkeleton.Views
     {
         public override void Navigate()
         {
-            var ViewA = new ViewA();
+            var ViewA = new AView();
             ViewA.Init("test");
 
             Navigation.PushAsync(ViewA);
         }
     }
 
-    public class ViewA : SimpleView
+    public class AView : SimpleView
     {
         private string _id;
 
