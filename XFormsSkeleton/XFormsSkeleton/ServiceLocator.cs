@@ -1,13 +1,9 @@
 ﻿using Autofac;
 using Autofac.Features.ResolveAnything;
+using XFormsSkeleton.Framework;
 
 namespace XFormsSkeleton
 {
-    public interface IServiceLocator
-    {
-        T Resolve<T>();
-    }
-
     public class ServiceLocator : IServiceLocator
     {
         private static IContainer _container;

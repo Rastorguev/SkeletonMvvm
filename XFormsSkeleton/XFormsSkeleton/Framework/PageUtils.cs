@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace XFormsSkeleton
+namespace XFormsSkeleton.Framework
 {
     public static class PageUtils
     {

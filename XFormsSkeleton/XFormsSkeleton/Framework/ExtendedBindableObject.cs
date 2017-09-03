@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace XFormsSkeleton.ViewModels.Base
+namespace XFormsSkeleton.Framework
 {
     public abstract class ExtendedBindableObject : BindableObject
     {

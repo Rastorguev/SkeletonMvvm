@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using XFormsSkeleton.Framework;
 using XFormsSkeleton.ViewModels;
 using XFormsSkeleton.Views;
 

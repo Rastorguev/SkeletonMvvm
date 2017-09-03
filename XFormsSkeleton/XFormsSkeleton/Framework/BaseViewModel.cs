@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace XFormsSkeleton.ViewModels.Base
+namespace XFormsSkeleton.Framework
 {
     public abstract class BaseViewModel<TNavData> : ExtendedBindableObject
     {

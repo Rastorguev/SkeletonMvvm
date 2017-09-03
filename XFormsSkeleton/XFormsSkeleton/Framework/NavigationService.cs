@@ -1,20 +1,8 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-using XFormsSkeleton.ViewModels.Base;
 
-namespace XFormsSkeleton
+namespace XFormsSkeleton.Framework
 {
-    public interface INavigationService
-    {
-        Task NavigateToAsync<TViewModel>(bool modal = false, bool animated = true)
-            where TViewModel : BaseViewModel<object>;
-
-        Task NavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
-            where TViewModel : BaseViewModel<TNavData>;
-
-        Task PopAsync(bool modal = false, bool animated = true);
-    }
-
     public class NavigationService : INavigationService
     {
         private readonly IServiceLocator _serviceLocator;
