@@ -1,6 +1,7 @@
-﻿using Autofac;
+using Autofac;
 using Autofac.Features.ResolveAnything;
 using XFormsSkeleton.Framework;
+using XFormsSkeleton.Framework.Navigation;
 
 namespace XFormsSkeleton
 {

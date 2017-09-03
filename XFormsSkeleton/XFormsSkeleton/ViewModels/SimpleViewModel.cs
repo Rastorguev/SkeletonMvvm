@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Xamarin.Forms;
 using XFormsSkeleton.Framework;
+using XFormsSkeleton.Framework.Navigation;
 
 namespace XFormsSkeleton.ViewModels
 {

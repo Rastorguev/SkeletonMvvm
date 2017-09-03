@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace XFormsSkeleton.Framework
+namespace XFormsSkeleton.Framework.Navigation
 {
     public class NavigationService : INavigationService
     {
@@ -13,6 +13,18 @@ namespace XFormsSkeleton.Framework
         }
 
         public INavigation Navigation => Application.Current.MainPage.Navigation;
+
+        public void Start<TViewModel>(Application application) where TViewModel : BaseViewModel<object>
+        {
+            var viewModelType = typeof(TViewModel);
+            var viewModel = _serviceLocator.Resolve<TViewModel>();
+
+            var page = PageUtils.CreatePage(viewModelType);
+            page.BindingContext = viewModel;
+
+            application.MainPage = new NavigationPage(page);
+            viewModel.InitAsync(null).Wait();
+        }
 
         public Task NavigateToAsync<TViewModel>(bool modal = false, bool animated = true)
             where TViewModel : BaseViewModel<object>
