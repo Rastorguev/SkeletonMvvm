@@ -17,8 +17,7 @@ namespace XFormsSkeleton.ViewModels.Base
         {
             MemberExpression operand;
             var lambdaExpression = (LambdaExpression) expression;
-            var expressionBody = lambdaExpression.Body as UnaryExpression;
-            if (expressionBody != null)
+            if (lambdaExpression.Body is UnaryExpression expressionBody)
             {
                 var body = expressionBody;
                 operand = (MemberExpression) body.Operand;

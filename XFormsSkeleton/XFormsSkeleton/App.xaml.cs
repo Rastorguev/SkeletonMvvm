@@ -10,15 +10,14 @@ namespace XFormsSkeleton
         {
             InitializeComponent();
             ServiceLocator.RegisterDependencies();
-
-            //MainPage = new NavigationPage(new ViewD());
+            MainPage = new NavigationPage(new MainView());
         }
 
         protected override async void OnStart()
         {
             base.OnStart();
 
-            var navService = ServiceLocator.Resolve<INavigationService>();//new NavigationService();
+            var navService = ServiceLocator.Resolve<INavigationService>();
             await navService.NavigateToAsync<MainViewModel>();
         }
     }

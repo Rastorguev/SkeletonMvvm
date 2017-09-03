@@ -10,7 +10,9 @@ namespace XFormsSkeleton.Views
         {
             InitializeComponent();
 
-            TitleLabel.Text = GetType().Name;
+            var title = GetType().Name;
+            Title = title;
+            TitleLabel.Text = title;
         }
 
         public virtual void NavButton_OnClicked(object sender, EventArgs e)
@@ -77,11 +79,11 @@ namespace XFormsSkeleton.Views
     {
         public override void Navigate()
         {
-           Navigation.PushModalAsync(new ViewC());
+            Navigation.PushModalAsync(new ViewC());
         }
     }
 
-    public class ViewC: SimpleView
+    public class ViewC : SimpleView
     {
         public override void Navigate()
         {

@@ -9,26 +9,42 @@ namespace XFormsSkeleton
 {
     public interface INavigationService
     {
-        Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel<object>;
+        Task NavigateToAsync<TViewModel>(bool modal = false, bool animated = true)
+            where TViewModel : BaseViewModel<object>;
 
-        Task NavigateToAsync<TViewModel, TNavData>(TNavData navData) where TViewModel : BaseViewModel<TNavData>;
+        Task NavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
+            where TViewModel : BaseViewModel<TNavData>;
+
+        Task PopAsync(bool modal = false, bool animated = true);
     }
 
     public class NavigationService : INavigationService
     {
-        public NavigationPage MainNavPage => Application.Current.MainPage as NavigationPage;
+        public INavigation Navigation => Application.Current.MainPage.Navigation;
 
-        public Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel<object>
+        public Task NavigateToAsync<TViewModel>(bool modal = false, bool animated = true)
+            where TViewModel : BaseViewModel<object>
         {
-            return InternalNavigateToAsync<TViewModel, object>(null);
+            return InternalNavigateToAsync<TViewModel, object>(null, modal, animated);
         }
 
-        public Task NavigateToAsync<TViewModel, TNavData>(TNavData navData) where TViewModel : BaseViewModel<TNavData>
+        public Task NavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
+            where TViewModel : BaseViewModel<TNavData>
         {
-            return InternalNavigateToAsync<TViewModel, TNavData>(navData);
+            return InternalNavigateToAsync<TViewModel, TNavData>(navData, modal, animated);
         }
 
-        private async Task InternalNavigateToAsync<TViewModel, TNavData>(TNavData navData)
+        public Task PopAsync(bool modal = false, bool animated = true)
+        {
+            if (modal)
+            {
+                return Navigation.PopModalAsync(animated);
+            }
+
+            return Navigation.PopAsync(animated);
+        }
+
+        private async Task InternalNavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal, bool animated)
             where TViewModel : BaseViewModel<TNavData>
         {
             var viewModelType = typeof(TViewModel);
@@ -42,7 +58,15 @@ namespace XFormsSkeleton
                 Application.Current.MainPage = new NavigationPage();
             }
 
-            await MainNavPage.PushAsync(page);
+            if (modal)
+            {
+                await Navigation.PushModalAsync(page, animated);
+            }
+            else
+            {
+                await Navigation.PushAsync(page, animated);
+            }
+
             await viewModel.InitAsync(navData);
         }
 

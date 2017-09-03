@@ -27,16 +27,18 @@ namespace XFormsSkeleton.ViewModels
 
         public override async Task Navigate()
         {
-            await _navigationService.NavigateToAsync<AViewModel, string>("test");
+            await _navigationService.NavigateToAsync<AViewModel, string>("test", modal: true);
         }
     }
 
     public class AViewModel : SimpleViewModel<string>
     {
+        private readonly INavigationService _navigationService;
         private string _navData;
 
-        public AViewModel()
+        public AViewModel(INavigationService navigationService)
         {
+            _navigationService = navigationService;
             _navData = "";
         }
 
@@ -49,7 +51,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return Task.FromResult(false);
+            return _navigationService.PopAsync(modal: true);
         }
     }
 }
