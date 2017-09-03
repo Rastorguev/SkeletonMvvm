@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 using XFormsSkeleton.ViewModels.Base;
 
@@ -20,6 +17,13 @@ namespace XFormsSkeleton
 
     public class NavigationService : INavigationService
     {
+        private readonly IServiceLocator _serviceLocator;
+
+        public NavigationService(IServiceLocator serviceLocator)
+        {
+            _serviceLocator = serviceLocator;
+        }
+
         public INavigation Navigation => Application.Current.MainPage.Navigation;
 
         public Task NavigateToAsync<TViewModel>(bool modal = false, bool animated = true)
@@ -48,9 +52,9 @@ namespace XFormsSkeleton
             where TViewModel : BaseViewModel<TNavData>
         {
             var viewModelType = typeof(TViewModel);
-            var viewModel = ServiceLocator.Resolve<TViewModel>();
+            var viewModel = _serviceLocator.Resolve<TViewModel>();
 
-            var page = CreatePage(viewModelType);
+            var page = PageUtils.CreatePage(viewModelType);
             page.BindingContext = viewModel;
 
             if (Application.Current.MainPage == null)
@@ -68,29 +72,6 @@ namespace XFormsSkeleton
             }
 
             await viewModel.InitAsync(navData);
-        }
-
-        private static Page CreatePage(Type viewModelType)
-        {
-            var pageType = GetPageTypeForViewModel(viewModelType);
-            if (pageType == null)
-            {
-                throw new Exception($"Cannot locate page type for {viewModelType}");
-            }
-
-            var page = Activator.CreateInstance(pageType) as Page;
-            return page;
-        }
-
-        private static Type GetPageTypeForViewModel(Type viewModelType)
-        {
-            var viewName = viewModelType.FullName.Replace("Model", string.Empty);
-            var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
-            var viewAssemblyName = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", viewName,
-                viewModelAssemblyName);
-            var viewType = Type.GetType(viewAssemblyName);
-
-            return viewType;
         }
     }
 }

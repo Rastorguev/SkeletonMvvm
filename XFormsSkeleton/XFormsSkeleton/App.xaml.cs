@@ -6,10 +6,16 @@ namespace XFormsSkeleton
 {
     public partial class App : Application
     {
+        private readonly INavigationService _navigationService;
+
         public App()
         {
+            var serviceLocator = new ServiceLocator();
+            serviceLocator.RegisterDependencies();
+
+            _navigationService = serviceLocator.Resolve<INavigationService>();
+
             InitializeComponent();
-            ServiceLocator.RegisterDependencies();
             MainPage = new NavigationPage(new MainView());
         }
 
@@ -17,8 +23,7 @@ namespace XFormsSkeleton
         {
             base.OnStart();
 
-            var navService = ServiceLocator.Resolve<INavigationService>();
-            await navService.NavigateToAsync<MainViewModel>();
+            await _navigationService.NavigateToAsync<MainViewModel>();
         }
     }
 }

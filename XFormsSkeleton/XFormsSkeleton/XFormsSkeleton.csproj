@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageUtils.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
     <Compile Include="INavigationService.cs" />
