@@ -80,8 +80,6 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            //return Task.FromResult(false);
-
             return _navigationService.PushWithNewNavigationAsync<CViewModel, string>("test", modal: true);
         }
     }
@@ -106,8 +104,6 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            //return Task.FromResult(false);
-
             return _navigationService.PushWithNewNavigationAsync<DViewModel, string>("test");
         }
     }
@@ -132,8 +128,6 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            //return Task.FromResult(false);
-
             return _navigationService.PushAsync<MainViewModel>();
         }
     }

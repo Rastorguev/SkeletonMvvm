@@ -62,12 +62,13 @@ namespace XFormsSkeleton.Framework.Navigation
 
         public Task PopAsync(bool modal = false, bool animated = true)
         {
+            var currentNavigation = CurrentNavigation;
             if (modal)
             {
-                return CurrentNavigation.PopModalAsync(animated);
+                return currentNavigation.PopModalAsync(animated);
             }
 
-            return CurrentNavigation.PopAsync(animated);
+            return currentNavigation.PopAsync(animated);
         }
 
         private async Task InternalPushAsync<TViewModel>(bool modal,
@@ -100,13 +101,14 @@ namespace XFormsSkeleton.Framework.Navigation
                 page = new NavigationPage(page);
             }
 
+            var currentNavigation = CurrentNavigation;
             if (modal)
             {
-                await CurrentNavigation.PushModalAsync(page, animated);
+                await currentNavigation.PushModalAsync(page, animated);
             }
             else
             {
-                await CurrentNavigation.PushAsync(page, animated);
+                await currentNavigation.PushAsync(page, animated);
             }
         }
 
