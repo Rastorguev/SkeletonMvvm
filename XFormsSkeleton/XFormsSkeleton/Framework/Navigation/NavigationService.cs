@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,42 +14,50 @@ namespace XFormsSkeleton.Framework.Navigation
             _serviceLocator = serviceLocator;
         }
 
-        public INavigation CurrentNavigation => GetCurrentPage().Navigation;
-
-        public void Start<TViewModel>(Application application) where TViewModel : BaseViewModel<object>
+        public INavigation CurrentNavigation
         {
-            var viewModelType = typeof(TViewModel);
-            var viewModel = _serviceLocator.Resolve<TViewModel>();
+            get
+            {
+                var currentPage = GetCurrentPage();
+                var currentNavigation = currentPage.Navigation;
 
-            var page = PageUtils.CreatePage(viewModelType);
+                Debug.WriteLine($"------- {currentPage.GetType().Name}");
+
+                return currentNavigation;
+            }
+        }
+
+        public void Start<TViewModel>(Application application) where TViewModel : IBaseViewModel
+        {
+            var viewModel = _serviceLocator.Resolve<TViewModel>();
+            var page = PageUtils.CreatePage<TViewModel>();
             page.BindingContext = viewModel;
 
             application.MainPage = new NavigationPage(page);
-            viewModel.InitAsync(null).Wait();
         }
 
         public Task PushAsync<TViewModel>(bool modal = false, bool animated = true)
-            where TViewModel : BaseViewModel<object>
+            where TViewModel : IBaseViewModel
         {
-            return InternalNavigateToAsync<TViewModel, object>(null, modal, false, animated);
+            return InternalPushAsync<TViewModel>(modal, false, animated);
         }
 
         public Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
-            where TViewModel : BaseViewModel<TNavData>
+            where TViewModel : IBaseViewModel<TNavData>
         {
-            return InternalNavigateToAsync<TViewModel, TNavData>(navData, modal, false, animated);
+            return InternalPushAsync<TViewModel, TNavData>(navData, modal, false, animated);
         }
 
         public Task PushWithNewNavigationAsync<TViewModel>(bool modal = false, bool animated = true)
-            where TViewModel : BaseViewModel<object>
+            where TViewModel : IBaseViewModel
         {
-            return InternalNavigateToAsync<TViewModel, object>(null, modal, true, animated);
+            return InternalPushAsync<TViewModel>(modal, true, animated);
         }
 
         public Task PushWithNewNavigationAsync<TViewModel, TNavData>(TNavData navData, bool modal = false,
-            bool animated = true) where TViewModel : BaseViewModel<TNavData>
+            bool animated = true) where TViewModel : IBaseViewModel<TNavData>
         {
-            return InternalNavigateToAsync<TViewModel, TNavData>(navData, modal, true, animated);
+            return InternalPushAsync<TViewModel, TNavData>(navData, modal, true, animated);
         }
 
         public Task PopAsync(bool modal = false, bool animated = true)
@@ -61,16 +70,31 @@ namespace XFormsSkeleton.Framework.Navigation
             return CurrentNavigation.PopAsync(animated);
         }
 
-        private async Task InternalNavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal,
+        private async Task InternalPushAsync<TViewModel>(bool modal,
             bool newNavigation, bool animated)
-            where TViewModel : BaseViewModel<TNavData>
+            where TViewModel : IBaseViewModel
         {
-            var viewModelType = typeof(TViewModel);
             var viewModel = _serviceLocator.Resolve<TViewModel>();
-
-            var page = PageUtils.CreatePage(viewModelType);
+            var page = PageUtils.CreatePage<TViewModel>();
             page.BindingContext = viewModel;
 
+            await ShowPage(page, modal, newNavigation, animated);
+        }
+
+        private async Task InternalPushAsync<TViewModel, TNavData>(TNavData navData, bool modal,
+            bool newNavigation, bool animated)
+            where TViewModel : IBaseViewModel<TNavData>
+        {
+            var viewModel = _serviceLocator.Resolve<TViewModel>();
+            var page = PageUtils.CreatePage<TViewModel>();
+            page.BindingContext = viewModel;
+
+            await ShowPage(page, modal, newNavigation, animated);
+            await viewModel.InitAsync(navData);
+        }
+
+        private async Task ShowPage(Page page, bool modal, bool newNavigation, bool animated)
+        {
             if (newNavigation)
             {
                 page = new NavigationPage(page);
@@ -84,8 +108,6 @@ namespace XFormsSkeleton.Framework.Navigation
             {
                 await CurrentNavigation.PushAsync(page, animated);
             }
-
-            await viewModel.InitAsync(navData);
         }
 
         public Page GetCurrentPage()

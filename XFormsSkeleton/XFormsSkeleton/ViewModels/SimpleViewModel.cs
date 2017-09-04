@@ -6,15 +6,19 @@ using XFormsSkeleton.Framework.Navigation;
 
 namespace XFormsSkeleton.ViewModels
 {
-    public abstract class SimpleViewModel<TNavData> : BaseViewModel<TNavData>
+    public abstract class SimpleViewModel : BaseViewModel
     {
         public ICommand NavigateCommand => new Command(async () => await Navigate());
 
         public abstract Task Navigate();
     }
 
-    public abstract class SimpleViewModel : SimpleViewModel<object>
+    public abstract class SimpleViewModel<TNavData> : SimpleViewModel, IBaseViewModel<TNavData>
     {
+        public virtual Task InitAsync(TNavData navData)
+        {
+            return Task.FromResult(false);
+        }
     }
 
     public class MainViewModel : SimpleViewModel
@@ -133,5 +137,4 @@ namespace XFormsSkeleton.ViewModels
             return _navigationService.PushAsync<MainViewModel>();
         }
     }
-
 }

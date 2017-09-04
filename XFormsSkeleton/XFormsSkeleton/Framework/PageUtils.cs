@@ -7,8 +7,9 @@ namespace XFormsSkeleton.Framework
 {
     public static class PageUtils
     {
-        public static Page CreatePage(Type viewModelType)
+        public static Page CreatePage<TViewModel>()
         {
+            var viewModelType = typeof(TViewModel);
             var pageType = GetPageTypeForViewModel(viewModelType);
             if (pageType == null)
             {

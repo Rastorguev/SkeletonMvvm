@@ -2,15 +2,15 @@
 
 namespace XFormsSkeleton.Framework
 {
-    public abstract class BaseViewModel<TNavData> : ExtendedBindableObject
+    public abstract class BaseViewModel : ExtendedBindableObject, IBaseViewModel
+    {
+    }
+
+    public abstract class BaseViewModel<TNavData> : IBaseViewModel<TNavData>
     {
         public virtual Task InitAsync(TNavData navData)
         {
             return Task.FromResult(false);
         }
-    }
-
-    public abstract class BaseViewModel : BaseViewModel<object>
-    {
     }
 }
