@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace XFormsSkeleton.Views
@@ -21,14 +20,6 @@ namespace XFormsSkeleton.Views
         }
 
         public abstract void Navigate();
-
-        public void Save(string prefix)
-        {
-        }
-
-        public void Restore(string prefix)
-        {
-        }
     }
 
     public class MainView : SimpleView
@@ -46,24 +37,6 @@ namespace XFormsSkeleton.Views
     {
         private string _id;
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            Debug.WriteLine("------OnAppearing");
-            Debug.WriteLine($"-----{_id}");
-            Debug.WriteLine("------------------------------");
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-
-            Debug.WriteLine("------OnSizeAllocated");
-            Debug.WriteLine($"-----{_id}");
-            Debug.WriteLine("------------------------------");
-        }
-
         public void Init(string id)
         {
             _id = id;
@@ -71,31 +44,30 @@ namespace XFormsSkeleton.Views
 
         public override void Navigate()
         {
-            Navigation.PushModalAsync(new NavigationPage(new ViewB()));
+            Navigation.PushModalAsync(new NavigationPage(new BView()));
         }
     }
 
-    public class ViewB : SimpleView
+    public class BView : SimpleView
     {
         public override void Navigate()
         {
-            Navigation.PushModalAsync(new ViewC());
+            Navigation.PushModalAsync(new CView());
         }
     }
 
-    public class ViewC : SimpleView
+    public class CView : SimpleView
     {
         public override void Navigate()
         {
-            Navigation.PushModalAsync(new ViewD());
+            Navigation.PushModalAsync(new DView());
         }
     }
 
-    public class ViewD : SimpleView
+    public class DView : SimpleView
     {
         public override void Navigate()
         {
-            //Navigation.PushAsync(new NavigationView(new ViewE()));
         }
     }
 

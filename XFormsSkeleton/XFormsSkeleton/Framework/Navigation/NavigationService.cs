@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,7 +13,7 @@ namespace XFormsSkeleton.Framework.Navigation
             _serviceLocator = serviceLocator;
         }
 
-        public INavigation Navigation => Application.Current.MainPage.Navigation;
+        public INavigation CurrentNavigation => GetCurrentPage().Navigation;
 
         public void Start<TViewModel>(Application application) where TViewModel : BaseViewModel<object>
         {
@@ -26,29 +27,42 @@ namespace XFormsSkeleton.Framework.Navigation
             viewModel.InitAsync(null).Wait();
         }
 
-        public Task NavigateToAsync<TViewModel>(bool modal = false, bool animated = true)
+        public Task PushAsync<TViewModel>(bool modal = false, bool animated = true)
             where TViewModel : BaseViewModel<object>
         {
-            return InternalNavigateToAsync<TViewModel, object>(null, modal, animated);
+            return InternalNavigateToAsync<TViewModel, object>(null, modal, false, animated);
         }
 
-        public Task NavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
+        public Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
             where TViewModel : BaseViewModel<TNavData>
         {
-            return InternalNavigateToAsync<TViewModel, TNavData>(navData, modal, animated);
+            return InternalNavigateToAsync<TViewModel, TNavData>(navData, modal, false, animated);
+        }
+
+        public Task PushWithNewNavigationAsync<TViewModel>(bool modal = false, bool animated = true)
+            where TViewModel : BaseViewModel<object>
+        {
+            return InternalNavigateToAsync<TViewModel, object>(null, modal, true, animated);
+        }
+
+        public Task PushWithNewNavigationAsync<TViewModel, TNavData>(TNavData navData, bool modal = false,
+            bool animated = true) where TViewModel : BaseViewModel<TNavData>
+        {
+            return InternalNavigateToAsync<TViewModel, TNavData>(navData, modal, true, animated);
         }
 
         public Task PopAsync(bool modal = false, bool animated = true)
         {
             if (modal)
             {
-                return Navigation.PopModalAsync(animated);
+                return CurrentNavigation.PopModalAsync(animated);
             }
 
-            return Navigation.PopAsync(animated);
+            return CurrentNavigation.PopAsync(animated);
         }
 
-        private async Task InternalNavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal, bool animated)
+        private async Task InternalNavigateToAsync<TViewModel, TNavData>(TNavData navData, bool modal,
+            bool newNavigation, bool animated)
             where TViewModel : BaseViewModel<TNavData>
         {
             var viewModelType = typeof(TViewModel);
@@ -57,21 +71,51 @@ namespace XFormsSkeleton.Framework.Navigation
             var page = PageUtils.CreatePage(viewModelType);
             page.BindingContext = viewModel;
 
-            if (Application.Current.MainPage == null)
+            if (newNavigation)
             {
-                Application.Current.MainPage = new NavigationPage();
+                page = new NavigationPage(page);
             }
 
             if (modal)
             {
-                await Navigation.PushModalAsync(page, animated);
+                await CurrentNavigation.PushModalAsync(page, animated);
             }
             else
             {
-                await Navigation.PushAsync(page, animated);
+                await CurrentNavigation.PushAsync(page, animated);
             }
 
             await viewModel.InitAsync(navData);
+        }
+
+        public Page GetCurrentPage()
+        {
+            var root = Application.Current.MainPage;
+            var modalStack = root.Navigation.ModalStack;
+
+            if (modalStack.Any())
+            {
+                return FindTopPage(modalStack.Last());
+            }
+
+            return FindTopPage(root);
+        }
+
+        public Page FindTopPage(Page page)
+        {
+            var navigationStack = page.Navigation.NavigationStack;
+            var childNavigationPage = (NavigationPage) navigationStack.FirstOrDefault(p => p is NavigationPage);
+
+            if (childNavigationPage == null || childNavigationPage.Navigation == page.Navigation)
+            {
+                if (navigationStack.Any())
+                {
+                    return navigationStack.Last();
+                }
+                return page;
+            }
+
+            return FindTopPage(childNavigationPage);
         }
     }
 }

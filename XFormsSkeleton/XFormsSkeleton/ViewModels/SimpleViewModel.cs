@@ -26,9 +26,9 @@ namespace XFormsSkeleton.ViewModels
             _navigationService = navigationService;
         }
 
-        public override async Task Navigate()
+        public override Task Navigate()
         {
-            await _navigationService.NavigateToAsync<AViewModel, string>("test", modal: true);
+            return _navigationService.PushWithNewNavigationAsync<AViewModel, string>("test");
         }
     }
 
@@ -52,7 +52,86 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return _navigationService.PopAsync(modal: true);
+            return _navigationService.PushWithNewNavigationAsync<BViewModel, string>("test");
         }
     }
+
+    public class BViewModel : SimpleViewModel<string>
+    {
+        private readonly INavigationService _navigationService;
+        private string _navData;
+
+        public BViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            _navData = "";
+        }
+
+        public override Task InitAsync(string navData)
+        {
+            _navData = navData;
+
+            return base.InitAsync(navData);
+        }
+
+        public override Task Navigate()
+        {
+            //return Task.FromResult(false);
+
+            return _navigationService.PushWithNewNavigationAsync<CViewModel, string>("test", modal: true);
+        }
+    }
+
+    public class CViewModel : SimpleViewModel<string>
+    {
+        private readonly INavigationService _navigationService;
+        private string _navData;
+
+        public CViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            _navData = "";
+        }
+
+        public override Task InitAsync(string navData)
+        {
+            _navData = navData;
+
+            return base.InitAsync(navData);
+        }
+
+        public override Task Navigate()
+        {
+            //return Task.FromResult(false);
+
+            return _navigationService.PushWithNewNavigationAsync<DViewModel, string>("test");
+        }
+    }
+
+    public class DViewModel : SimpleViewModel<string>
+    {
+        private readonly INavigationService _navigationService;
+        private string _navData;
+
+        public DViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            _navData = "";
+        }
+
+        public override Task InitAsync(string navData)
+        {
+            _navData = navData;
+
+            return base.InitAsync(navData);
+        }
+
+        public override Task Navigate()
+        {
+            //return Task.FromResult(false);
+
+            return _navigationService.PushAsync<MainViewModel>();
+        }
+    }
+
 }
