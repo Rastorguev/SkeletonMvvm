@@ -53,7 +53,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return _navigationService.PushWithNewNavigationAsync<BViewModel, string>("test");
+            return _navigationService.PushAsync<BViewModel, string>("test");
         }
     }
 

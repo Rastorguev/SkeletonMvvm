@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 using XFormsSkeleton.Framework;
-using XFormsSkeleton.ViewModels;
+using XFormsSkeleton.ViewModels.MasterDetail;
 
 namespace XFormsSkeleton
 {
@@ -14,7 +14,9 @@ namespace XFormsSkeleton
             serviceLocator.RegisterDependencies();
 
             var pageResolver = serviceLocator.Resolve<IPageResolver>();
-            MainPage = new NavigationPage(pageResolver.ResolvePage<MainViewModel>());
+            MainPage = pageResolver.ResolvePage<MasterDetailViewModel>();
+
+            //new NavigationPage(pageResolver.ResolvePage<MainViewModel>());
         }
     }
 }
