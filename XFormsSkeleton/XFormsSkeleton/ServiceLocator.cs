@@ -1,3 +1,4 @@
+using System;
 using Autofac;
 using Autofac.Features.ResolveAnything;
 using XFormsSkeleton.Framework;
@@ -9,9 +10,11 @@ namespace XFormsSkeleton
     {
         private static IContainer _container;
 
-        public T Resolve<T>()
+        public object Resolve(Type type)
         {
-            return _container.Resolve<T>();
+            var instance = _container.Resolve(type);
+
+            return instance;
         }
 
         public void RegisterDependencies()

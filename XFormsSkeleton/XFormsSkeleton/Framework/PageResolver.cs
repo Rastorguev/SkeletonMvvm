@@ -36,7 +36,7 @@ namespace XFormsSkeleton.Framework
             return page;
         }
 
-        private static Page CreatePage(Type viewModelType)
+        private Page CreatePage(Type viewModelType)
         {
             var pageType = GetPageTypeForViewModel(viewModelType);
             if (pageType == null)
@@ -44,7 +44,7 @@ namespace XFormsSkeleton.Framework
                 throw new Exception($"Cannot locate page type for {viewModelType}");
             }
 
-            var page = Activator.CreateInstance(pageType) as Page;
+            var page = (Page) _serviceLocator.Resolve(pageType);
             return page;
         }
 

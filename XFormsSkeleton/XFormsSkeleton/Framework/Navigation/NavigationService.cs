@@ -28,12 +28,6 @@ namespace XFormsSkeleton.Framework.Navigation
             }
         }
 
-        public void Start<TViewModel>(Application application) where TViewModel : IBaseViewModel
-        {
-            var page = _pageResolver.ResolvePage<TViewModel>();
-            application.MainPage = new NavigationPage(page);
-        }
-
         public Task PushAsync<TViewModel>(bool modal = false, bool animated = true)
             where TViewModel : IBaseViewModel
         {
