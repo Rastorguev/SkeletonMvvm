@@ -41,7 +41,7 @@
     <Compile Include="Framework\IBaseViewModel.cs" />
     <Compile Include="Framework\IServiceLocator.cs" />
     <Compile Include="Framework\Navigation\NavigationService.cs" />
-    <Compile Include="Framework\PageUtils.cs" />
+    <Compile Include="Framework\PageResolver.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Framework\ExtendedBindableObject.cs" />
     <Compile Include="Framework\Navigation\INavigationService.cs" />

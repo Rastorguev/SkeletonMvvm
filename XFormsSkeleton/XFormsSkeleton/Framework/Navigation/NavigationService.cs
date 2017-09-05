@@ -30,8 +30,7 @@ namespace XFormsSkeleton.Framework.Navigation
         public void Start<TViewModel>(Application application) where TViewModel : IBaseViewModel
         {
             var viewModel = _serviceLocator.Resolve<TViewModel>();
-            var page = PageUtils.CreatePage<TViewModel>();
-            page.BindingContext = viewModel;
+            var page = PageResolver.ResolvePage(viewModel);
 
             application.MainPage = new NavigationPage(page);
         }
@@ -76,8 +75,7 @@ namespace XFormsSkeleton.Framework.Navigation
             where TViewModel : IBaseViewModel
         {
             var viewModel = _serviceLocator.Resolve<TViewModel>();
-            var page = PageUtils.CreatePage<TViewModel>();
-            page.BindingContext = viewModel;
+            var page = PageResolver.ResolvePage(viewModel);
 
             await ShowPage(page, modal, newNavigation, animated);
         }
@@ -87,8 +85,7 @@ namespace XFormsSkeleton.Framework.Navigation
             where TViewModel : IBaseViewModel<TNavData>
         {
             var viewModel = _serviceLocator.Resolve<TViewModel>();
-            var page = PageUtils.CreatePage<TViewModel>();
-            page.BindingContext = viewModel;
+            var page = PageResolver.ResolvePage(viewModel);
 
             await ShowPage(page, modal, newNavigation, animated);
             await viewModel.InitAsync(navData);

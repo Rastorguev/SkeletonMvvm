@@ -5,11 +5,18 @@ using Xamarin.Forms;
 
 namespace XFormsSkeleton.Framework
 {
-    public static class PageUtils
+    public static class PageResolver
     {
-        public static Page CreatePage<TViewModel>()
+        public static Page ResolvePage(IBaseViewModel viewModel)
         {
-            var viewModelType = typeof(TViewModel);
+            var page = CreatePage(viewModel.GetType());
+            page.BindingContext = viewModel;
+
+            return page;
+        }
+
+        public static Page CreatePage(Type viewModelType)
+        {
             var pageType = GetPageTypeForViewModel(viewModelType);
             if (pageType == null)
             {

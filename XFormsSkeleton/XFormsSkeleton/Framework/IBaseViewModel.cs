@@ -6,7 +6,7 @@ namespace XFormsSkeleton.Framework
     {
     }
 
-    public interface IBaseViewModel<in TNavData>
+    public interface IBaseViewModel<in TNavData> : IBaseViewModel
     {
         Task InitAsync(TNavData navData);
     }
