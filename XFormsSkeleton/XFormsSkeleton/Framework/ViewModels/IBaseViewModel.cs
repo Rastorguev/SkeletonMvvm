@@ -8,6 +8,6 @@ namespace XFormsSkeleton.Framework.ViewModels
 
     public interface IBaseViewModel<in TNavData> : IBaseViewModel
     {
-        Task InitAsync(TNavData navData);
+        void Init(TNavData navData);
     }
 }

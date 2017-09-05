@@ -18,8 +18,11 @@ namespace XFormsSkeleton
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance()
+            builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
+
+            builder.RegisterType<PageResolver>().As<IPageResolver>().SingleInstance()
                 .WithParameter("serviceLocator", this);
+
             builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
 
             _container?.Dispose();

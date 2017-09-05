@@ -8,11 +8,11 @@ namespace XFormsSkeleton.Framework.Navigation
 {
     public class NavigationService : INavigationService
     {
-        private readonly IServiceLocator _serviceLocator;
+        private readonly IPageResolver _pageResolver;
 
-        public NavigationService(IServiceLocator serviceLocator)
+        public NavigationService(IPageResolver pageResolver)
         {
-            _serviceLocator = serviceLocator;
+            _pageResolver = pageResolver;
         }
 
         public INavigation CurrentNavigation
@@ -30,34 +30,32 @@ namespace XFormsSkeleton.Framework.Navigation
 
         public void Start<TViewModel>(Application application) where TViewModel : IBaseViewModel
         {
-            var viewModel = _serviceLocator.Resolve<TViewModel>();
-            var page = PageResolver.ResolvePage(viewModel);
-
+            var page = _pageResolver.ResolvePage<TViewModel>();
             application.MainPage = new NavigationPage(page);
         }
 
         public Task PushAsync<TViewModel>(bool modal = false, bool animated = true)
             where TViewModel : IBaseViewModel
         {
-            return InternalPushAsync<TViewModel>(modal, false, animated);
+            return PushAsync<TViewModel>(modal, false, animated);
         }
 
         public Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
             where TViewModel : IBaseViewModel<TNavData>
         {
-            return InternalPushAsync<TViewModel, TNavData>(navData, modal, false, animated);
+            return PushAsync<TViewModel, TNavData>(navData, modal, false, animated);
         }
 
         public Task PushWithNewNavigationAsync<TViewModel>(bool modal = false, bool animated = true)
             where TViewModel : IBaseViewModel
         {
-            return InternalPushAsync<TViewModel>(modal, true, animated);
+            return PushAsync<TViewModel>(modal, true, animated);
         }
 
         public Task PushWithNewNavigationAsync<TViewModel, TNavData>(TNavData navData, bool modal = false,
             bool animated = true) where TViewModel : IBaseViewModel<TNavData>
         {
-            return InternalPushAsync<TViewModel, TNavData>(navData, modal, true, animated);
+            return PushAsync<TViewModel, TNavData>(navData, modal, true, animated);
         }
 
         public Task PopAsync(bool modal = false, bool animated = true)
@@ -71,28 +69,25 @@ namespace XFormsSkeleton.Framework.Navigation
             return currentNavigation.PopAsync(animated);
         }
 
-        private async Task InternalPushAsync<TViewModel>(bool modal,
+        private async Task PushAsync<TViewModel>(bool modal,
             bool newNavigation, bool animated)
             where TViewModel : IBaseViewModel
         {
-            var viewModel = _serviceLocator.Resolve<TViewModel>();
-            var page = PageResolver.ResolvePage(viewModel);
+            var page = _pageResolver.ResolvePage<TViewModel>();
 
-            await ShowPage(page, modal, newNavigation, animated);
+            await PushPage(page, modal, newNavigation, animated);
         }
 
-        private async Task InternalPushAsync<TViewModel, TNavData>(TNavData navData, bool modal,
+        private async Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal,
             bool newNavigation, bool animated)
             where TViewModel : IBaseViewModel<TNavData>
         {
-            var viewModel = _serviceLocator.Resolve<TViewModel>();
-            var page = PageResolver.ResolvePage(viewModel);
+            var page = _pageResolver.ResolvePage<TViewModel>();
 
-            await ShowPage(page, modal, newNavigation, animated);
-            await viewModel.InitAsync(navData);
+            await PushPage(page, modal, newNavigation, animated);
         }
 
-        private async Task ShowPage(Page page, bool modal, bool newNavigation, bool animated)
+        private async Task PushPage(Page page, bool modal, bool newNavigation, bool animated)
         {
             if (newNavigation)
             {

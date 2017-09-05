@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace XFormsSkeleton.Framework.ViewModels
+﻿namespace XFormsSkeleton.Framework.ViewModels
 {
     public abstract class BaseViewModel : ExtendedBindableObject, IBaseViewModel
     {
@@ -8,9 +6,8 @@ namespace XFormsSkeleton.Framework.ViewModels
 
     public abstract class BaseViewModel<TNavData> : IBaseViewModel<TNavData>
     {
-        public virtual Task InitAsync(TNavData navData)
+        public virtual void Init(TNavData navData)
         {
-            return Task.FromResult(false);
         }
     }
 }

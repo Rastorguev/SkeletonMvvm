@@ -15,9 +15,8 @@ namespace XFormsSkeleton.ViewModels
 
     public abstract class SimpleViewModel<TNavData> : SimpleViewModel, IBaseViewModel<TNavData>
     {
-        public virtual Task InitAsync(TNavData navData)
+        public virtual void Init(TNavData navData)
         {
-            return Task.FromResult(false);
         }
     }
 
@@ -47,11 +46,9 @@ namespace XFormsSkeleton.ViewModels
             _navData = "";
         }
 
-        public override Task InitAsync(string navData)
+        public override void Init(string navData)
         {
             _navData = navData;
-
-            return base.InitAsync(navData);
         }
 
         public override Task Navigate()
@@ -71,11 +68,9 @@ namespace XFormsSkeleton.ViewModels
             _navData = "";
         }
 
-        public override Task InitAsync(string navData)
+        public override void Init(string navData)
         {
             _navData = navData;
-
-            return base.InitAsync(navData);
         }
 
         public override Task Navigate()
@@ -95,11 +90,9 @@ namespace XFormsSkeleton.ViewModels
             _navData = "";
         }
 
-        public override Task InitAsync(string navData)
+        public override void Init(string navData)
         {
             _navData = navData;
-
-            return base.InitAsync(navData);
         }
 
         public override Task Navigate()
@@ -119,11 +112,9 @@ namespace XFormsSkeleton.ViewModels
             _navData = "";
         }
 
-        public override Task InitAsync(string navData)
+        public override void Init(string navData)
         {
             _navData = navData;
-
-            return base.InitAsync(navData);
         }
 
         public override Task Navigate()

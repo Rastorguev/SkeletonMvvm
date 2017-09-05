@@ -15,6 +15,8 @@ namespace XFormsSkeleton
 
             var navigationService = serviceLocator.Resolve<INavigationService>();
             navigationService.Start<MainViewModel>(this);
+
+            //MainPage = new MasterDetail();
         }
     }
 }

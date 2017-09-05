@@ -6,17 +6,37 @@ using XFormsSkeleton.Framework.ViewModels;
 
 namespace XFormsSkeleton.Framework
 {
-    public static class PageResolver
+    public class PageResolver : IPageResolver
     {
-        public static Page ResolvePage(IBaseViewModel viewModel)
+        private readonly IServiceLocator _serviceLocator;
+
+        public PageResolver(IServiceLocator serviceLocator)
         {
+            _serviceLocator = serviceLocator;
+        }
+
+        public Page ResolvePage<TViewModel>() where TViewModel : IBaseViewModel
+        {
+            var viewModel = _serviceLocator.Resolve<TViewModel>();
             var page = CreatePage(viewModel.GetType());
             page.BindingContext = viewModel;
 
             return page;
         }
 
-        public static Page CreatePage(Type viewModelType)
+        public Page ResolvePage<TViewModel, TNavData>(TNavData navData)
+            where TViewModel : IBaseViewModel<TNavData>
+        {
+            var viewModel = _serviceLocator.Resolve<TViewModel>();
+            var page = CreatePage(viewModel.GetType());
+            page.BindingContext = viewModel;
+
+            viewModel.Init(navData);
+
+            return page;
+        }
+
+        private static Page CreatePage(Type viewModelType)
         {
             var pageType = GetPageTypeForViewModel(viewModelType);
             if (pageType == null)
