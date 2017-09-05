@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace XFormsSkeleton.Framework
+namespace XFormsSkeleton.Framework.ViewModels
 {
     public interface IBaseViewModel
     {

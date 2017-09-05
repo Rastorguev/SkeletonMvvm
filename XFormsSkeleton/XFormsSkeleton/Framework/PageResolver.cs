@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 using Xamarin.Forms;
+using XFormsSkeleton.Framework.ViewModels;
 
 namespace XFormsSkeleton.Framework
 {

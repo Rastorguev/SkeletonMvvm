@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XFormsSkeleton.Framework.ViewModels;
 
 namespace XFormsSkeleton.Framework.Navigation
 {

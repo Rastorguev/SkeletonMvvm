@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms;
+using XFormsSkeleton.Framework.ViewModels;
 
 namespace XFormsSkeleton.Framework.Navigation
 {
