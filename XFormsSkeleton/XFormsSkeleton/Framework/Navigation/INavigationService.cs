@@ -19,5 +19,7 @@ namespace XFormsSkeleton.Framework.Navigation
             where TViewModel : IBaseViewModel<TNavData>;
 
         Task PopAsync(bool modal = false, bool animated = true);
+
+        Task PopToRootAsync(bool animated = true);
     }
 }

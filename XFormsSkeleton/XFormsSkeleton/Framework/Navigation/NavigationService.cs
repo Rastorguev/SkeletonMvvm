@@ -63,6 +63,13 @@ namespace XFormsSkeleton.Framework.Navigation
             return currentNavigation.PopAsync(animated);
         }
 
+        public Task PopToRootAsync(bool animated = true)
+        {
+            var currentNavigation = CurrentNavigation;
+
+            return currentNavigation.PopToRootAsync(animated);
+        }
+
         private async Task PushAsync<TViewModel>(bool modal,
             bool newNavigation, bool animated)
             where TViewModel : IBaseViewModel
