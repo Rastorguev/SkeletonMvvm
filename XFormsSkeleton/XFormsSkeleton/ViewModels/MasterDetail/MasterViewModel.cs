@@ -6,28 +6,28 @@ namespace XFormsSkeleton.ViewModels.MasterDetail
 {
     public class MasterViewModel : IBaseViewModel
     {
-        public ObservableCollection<MasterMenuItem> MenuItems { get; }
+        public ObservableCollection<MenuItem> MenuItems { get; }
 
         public MasterViewModel()
         {
-            MenuItems = new ObservableCollection<MasterMenuItem>(new[]
+            MenuItems = new ObservableCollection<MenuItem>(new[]
             {
-                new MasterMenuItem
+                new MenuItem
                 {
                     Title = "AView",
-                    ItemType = MasterMenuItemType.Type1
+                    ItemType = MenuItemType.Type1
                 },
 
-                new MasterMenuItem
+                new MenuItem
                 {
                     Title = "BView",
-                    ItemType = MasterMenuItemType.Type2
+                    ItemType = MenuItemType.Type2
                 },
 
-                new MasterMenuItem
+                new MenuItem
                 {
                     Title = "CView",
-                    ItemType = MasterMenuItemType.Type3
+                    ItemType = MenuItemType.Type3
                 }
             });
         }
