@@ -114,26 +114,29 @@ namespace XFormsSkeleton.Framework.Navigation
 
         public Page FindTopPage(Page page)
         {
-            var navigationStack = page.Navigation.NavigationStack;
-            var childNavigationPage = (NavigationPage) navigationStack.LastOrDefault(p => p is NavigationPage);
-
-            if (childNavigationPage == null)
+            var navigationPage = page as NavigationPage;
+            if (navigationPage != null)
             {
-                if (navigationStack.Any())
+                var navStack = navigationPage.Navigation.NavigationStack;
+                if (navStack.Any())
                 {
-                    return navigationStack.Last();
+                    return FindTopPage(navStack.Last());
                 }
-
-                var masterDetailPage = page as MasterDetailPage;
-                if (masterDetailPage != null)
-                {
-                    return FindTopPage(masterDetailPage.Detail);
-                }
-
-                return page;
             }
 
-            return FindTopPage(childNavigationPage);
+            var masterDetailPage = page as MasterDetailPage;
+            if (masterDetailPage?.Detail != null)
+            {
+                return FindTopPage(masterDetailPage.Detail);
+            }
+
+            var tabbedPage = page as TabbedPage;
+            if (tabbedPage?.CurrentPage != null)
+            {
+                return FindTopPage(tabbedPage.CurrentPage);
+            }
+
+            return page;
         }
     }
 }
