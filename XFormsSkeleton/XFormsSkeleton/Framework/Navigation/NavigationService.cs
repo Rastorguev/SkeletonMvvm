@@ -70,6 +70,33 @@ namespace XFormsSkeleton.Framework.Navigation
             return currentNavigation.PopToRootAsync(animated);
         }
 
+        public Task TryPopToAsync<TViewModel>(bool animated = true)
+        {
+            var currentNavigation = CurrentNavigation;
+            var navigationStack = currentNavigation.NavigationStack;
+
+            if (!navigationStack.Any())
+            {
+                return Task.FromResult(false);
+            }
+
+            var targetPage = navigationStack.LastOrDefault(p => p.BindingContext is TViewModel);
+            var lastPage = navigationStack.Last();
+            if (targetPage == null || targetPage == lastPage)
+            {
+                return Task.FromResult(false);
+            }
+
+            var lastButOnePage = navigationStack[navigationStack.Count - 2];
+            while (lastButOnePage != targetPage)
+            {
+                currentNavigation.RemovePage(lastButOnePage);
+                lastButOnePage = navigationStack[navigationStack.Count - 2];
+            }
+
+            return currentNavigation.PopAsync(animated);
+        }
+
         private async Task PushAsync<TViewModel>(bool modal,
             bool newNavigation, bool animated)
             where TViewModel : IBaseViewModel

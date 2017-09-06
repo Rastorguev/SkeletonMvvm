@@ -31,7 +31,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return _navigationService.PushWithNewNavigationAsync<AViewModel, string>("test");
+            return _navigationService.PushAsync<AViewModel, string>("test");
         }
     }
 
@@ -53,6 +53,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
+
             return _navigationService.PushAsync<BViewModel, string>("test");
         }
     }
@@ -75,7 +76,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return _navigationService.PushWithNewNavigationAsync<CViewModel, string>("test", modal: true);
+            return _navigationService.PushAsync<CViewModel, string>("test");
         }
     }
 
@@ -97,7 +98,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return _navigationService.PushWithNewNavigationAsync<DViewModel, string>("test");
+            return _navigationService.PushAsync<DViewModel, string>("test");
         }
     }
 
@@ -119,7 +120,7 @@ namespace XFormsSkeleton.ViewModels
 
         public override Task Navigate()
         {
-            return _navigationService.PushAsync<MainViewModel>();
+            return _navigationService.TryPopToAsync<MainViewModel>();
         }
     }
 }

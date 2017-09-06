@@ -21,5 +21,7 @@ namespace XFormsSkeleton.Framework.Navigation
         Task PopAsync(bool modal = false, bool animated = true);
 
         Task PopToRootAsync(bool animated = true);
+
+        Task TryPopToAsync<TViewModel>(bool animated = true);
     }
 }
