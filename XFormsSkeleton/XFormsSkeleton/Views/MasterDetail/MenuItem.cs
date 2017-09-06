@@ -3,13 +3,13 @@ using Xamarin.Forms;
 
 namespace XFormsSkeleton.Views.MasterDetail
 {
-    public class MasterMenuItem
+    public class MenuItem
     {
         public string Title { get; set; }
-        public MasterMenuItemType ItemType{ get; set; }
+        public MenuItemType ItemType{ get; set; }
     }
 
-    public enum MasterMenuItemType
+    public enum MenuItemType
     {
         Type1,
         Type2,

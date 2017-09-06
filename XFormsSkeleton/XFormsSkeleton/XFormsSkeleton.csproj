@@ -54,7 +54,7 @@
     <Compile Include="Views\MasterDetail\MasterView.xaml.cs">
       <DependentUpon>MasterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MasterDetail\MasterMenuItem.cs" />
+    <Compile Include="Views\MasterDetail\MenuItem.cs" />
     <Compile Include="Views\SimpleView.xaml.cs">
       <DependentUpon>SimpleView.xaml</DependentUpon>
     </Compile>

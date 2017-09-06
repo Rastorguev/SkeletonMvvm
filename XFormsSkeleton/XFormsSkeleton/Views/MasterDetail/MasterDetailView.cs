@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using Xamarin.Forms;
 using XFormsSkeleton.Framework;
 using XFormsSkeleton.ViewModels;
 using XFormsSkeleton.ViewModels.MasterDetail;
@@ -14,11 +15,11 @@ namespace XFormsSkeleton.Views.MasterDetail
             _pageResolver = pageResolver;
 
             var master = pageResolver.ResolvePage<MasterViewModel>();
-            master.Title = "Master";
-            var detail = CreatePage(MasterMenuItemType.Type1);
-            detail.Title = "Test";
-
+            master.Title = "Menu";
             Master = master;
+
+            var firstMenuItem = MasterView.List.ItemsSource.Cast<MenuItem>().First();
+            var detail = CreatePage(firstMenuItem);
             Detail = new NavigationPage(detail);
 
             MasterView.List.ItemSelected += ListView_ItemSelected;
@@ -28,14 +29,13 @@ namespace XFormsSkeleton.Views.MasterDetail
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MasterMenuItem;
+            var item = e.SelectedItem as MenuItem;
             if (item == null)
             {
                 return;
             }
 
-            var page = CreatePage(item.ItemType);
-            page.Title = item.Title;
+            var page = CreatePage(item);
 
             Detail = new NavigationPage(page);
             IsPresented = false;
@@ -43,19 +43,19 @@ namespace XFormsSkeleton.Views.MasterDetail
             MasterView.List.SelectedItem = null;
         }
 
-        private Page CreatePage(MasterMenuItemType itemType)
+        private Page CreatePage(MenuItem item)
         {
             Page page = null;
 
-            switch (itemType)
+            switch (item.ItemType)
             {
-                case MasterMenuItemType.Type1:
+                case MenuItemType.Type1:
                     page = _pageResolver.ResolvePage<AViewModel, string>("A");
                     break;
-                case MasterMenuItemType.Type2:
+                case MenuItemType.Type2:
                     page = _pageResolver.ResolvePage<BViewModel, string>("B");
                     break;
-                case MasterMenuItemType.Type3:
+                case MenuItemType.Type3:
                     page = _pageResolver.ResolvePage<CViewModel, string>("C");
                     break;
                 default:
@@ -63,6 +63,7 @@ namespace XFormsSkeleton.Views.MasterDetail
                     break;
             }
 
+            page.Title = item.Title;
             return page;
         }
     }
