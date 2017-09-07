@@ -134,9 +134,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XFormsSkeleton\XFormsSkeleton.csproj">
+    <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
       <Project>{9a5bc5bd-642a-49a2-a71d-46cc09b5851c}</Project>
-      <Name>XFormsSkeleton</Name>
+      <Name>Sample.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
