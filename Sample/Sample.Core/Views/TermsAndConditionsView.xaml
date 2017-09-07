@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:styles="clr-namespace:Sample.Core.Styles;assembly=Sample.Core"
-    x:Class="Sample.Core.Views.TermsAndConditionsView">
+    x:Class="Sample.Core.Views.TermsAndConditionsView"
+    Title="{Binding Title}">
     <ContentPage.Content>
         <Grid
             Padding="0"
