@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:Sample.Core.Styles;assembly=Sample.Core"
+    x:Class="Sample.Core.Views.TermsAndConditionsView">
+    <ContentPage.Content>
+        <Grid
+            Padding="0"
+            RowSpacing="0"
+            ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Entry
+                Grid.Row="0"
+                Text="Terms And Conditions"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" />
+            <StackLayout
+                Grid.Row="1"
+                Spacing="0"
+                Orientation="Horizontal"
+                Style="{x:Static styles:Styles.LeftRightIndentContainer}">
+                <Button
+                    Text="Accept"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding AcceptCommand}" />
+                <Button
+                    Text="Cancel"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

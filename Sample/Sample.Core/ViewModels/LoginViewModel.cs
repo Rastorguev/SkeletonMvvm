@@ -18,11 +18,11 @@ namespace Sample.Core.ViewModels
 
         public string Password { get; set; }
 
-        public ICommand LoginCommand => new Command(async () => await PerformLogin());
+        public ICommand LoginCommand => new Command(async () => await DoLogin());
 
-        private Task PerformLogin()
+        private Task DoLogin()
         {
-            return _navigationService.PushAsync<MainViewModel>();
+            return _navigationService.PushAsync<TermsAndConditionsViewModel>();
         }
     }
 }
