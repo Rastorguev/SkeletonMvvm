@@ -1,8 +1,10 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Sample.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Resource = Sample.Droid.Resource;
 
 namespace XFormsSkeleton.Droid
 {

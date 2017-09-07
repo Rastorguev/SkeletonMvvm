@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
+using Sample.Core.Views.MasterDetail;
 using SkeletonMvvm;
-using XFormsSkeleton.Views.MasterDetail;
 
-namespace XFormsSkeleton.ViewModels.MasterDetail
+namespace Sample.Core.ViewModels.MasterDetail
 {
     public class MasterViewModel : IBaseViewModel
     {

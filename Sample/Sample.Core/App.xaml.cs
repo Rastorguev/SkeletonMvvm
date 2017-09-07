@@ -1,8 +1,8 @@
-﻿using SkeletonMvvm;
+﻿using Sample.Core.ViewModels;
+using SkeletonMvvm;
 using Xamarin.Forms;
-using XFormsSkeleton.ViewModels;
 
-namespace XFormsSkeleton
+namespace Sample.Core
 {
     public partial class App : Application
     {

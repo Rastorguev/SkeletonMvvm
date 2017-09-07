@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
-namespace XFormsSkeleton.Views.MasterDetail
+﻿namespace Sample.Core.Views.MasterDetail
 {
     public class MenuItem
     {

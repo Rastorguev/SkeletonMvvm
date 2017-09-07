@@ -3,7 +3,7 @@ using System.Windows.Input;
 using SkeletonMvvm;
 using Xamarin.Forms;
 
-namespace XFormsSkeleton.ViewModels
+namespace Sample.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {

@@ -3,7 +3,7 @@ using Autofac;
 using Autofac.Features.ResolveAnything;
 using SkeletonMvvm;
 
-namespace XFormsSkeleton
+namespace Sample.Core
 {
     public class AutofacServiceLocator : IServiceLocator
     {

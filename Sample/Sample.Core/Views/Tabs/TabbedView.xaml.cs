@@ -1,9 +1,9 @@
-﻿using SkeletonMvvm;
+﻿using Sample.Core.ViewModels;
+using SkeletonMvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XFormsSkeleton.ViewModels;
 
-namespace XFormsSkeleton.Views.Tabs
+namespace Sample.Core.Views.Tabs
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabbedView : TabbedPage

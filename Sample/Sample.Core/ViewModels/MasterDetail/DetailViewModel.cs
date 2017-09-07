@@ -1,6 +1,6 @@
 ﻿using SkeletonMvvm;
 
-namespace XFormsSkeleton.ViewModels.MasterDetail
+namespace Sample.Core.ViewModels.MasterDetail
 {
     public class DetailViewModel : IBaseViewModel
     {

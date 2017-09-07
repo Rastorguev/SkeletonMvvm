@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace XFormsSkeleton.Views
+namespace Sample.Core.Views
 {
     public abstract partial class SimpleView : ContentPage
     {

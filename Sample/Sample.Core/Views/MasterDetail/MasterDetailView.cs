@@ -1,10 +1,10 @@
 ﻿using System.Linq;
+using Sample.Core.ViewModels;
+using Sample.Core.ViewModels.MasterDetail;
 using SkeletonMvvm;
 using Xamarin.Forms;
-using XFormsSkeleton.ViewModels;
-using XFormsSkeleton.ViewModels.MasterDetail;
 
-namespace XFormsSkeleton.Views.MasterDetail
+namespace Sample.Core.Views.MasterDetail
 {
     public class MasterDetailView : MasterDetailPage
     {

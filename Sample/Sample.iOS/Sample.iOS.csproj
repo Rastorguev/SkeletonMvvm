@@ -8,9 +8,9 @@
     <ProjectGuid>{949B5120-16AE-4B8D-B763-61EFBBD23B31}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>XFormsSkeleton.iOS</RootNamespace>
+    <RootNamespace>Sample.Droid.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>XFormsSkeleton.iOS</AssemblyName>
+    <AssemblyName>Sample.Droid.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>

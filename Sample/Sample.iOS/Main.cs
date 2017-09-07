@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace XFormsSkeleton.iOS
+namespace Sample.Droid.iOS
 {
     public class Application
     {

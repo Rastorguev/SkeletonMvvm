@@ -8,8 +8,8 @@
     <ProjectGuid>{9A5BC5BD-642A-49A2-A71D-46CC09B5851C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XFormsSkeleton</RootNamespace>
-    <AssemblyName>XFormsSkeleton</AssemblyName>
+    <RootNamespace>Sample.Core</RootNamespace>
+    <AssemblyName>Sample.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>

@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace XFormsSkeleton.Views
+namespace Sample.Core.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView : ContentPage

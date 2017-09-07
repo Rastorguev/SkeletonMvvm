@@ -1,6 +1,6 @@
 ﻿using SkeletonMvvm;
 
-namespace XFormsSkeleton.ViewModels.Tabs
+namespace Sample.Core.ViewModels.Tabs
 {
     public class TabbedViewModel : IBaseViewModel
     {
