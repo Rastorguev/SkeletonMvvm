@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,28 +28,17 @@ namespace SkeletonMvvm
             }
         }
 
-        public Task PushAsync<TViewModel>(bool modal = false, bool animated = true)
+        public Task PushAsync<TViewModel>(bool modal = false, bool newNavigation = false, bool animated = true)
             where TViewModel : IBaseViewModel
         {
-            return PushAsync<TViewModel>(modal, false, animated);
+            return InternalPushAsync<TViewModel>(modal, newNavigation, animated);
         }
 
-        public Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
+        public Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool newNavigation = false,
+            bool animated = true)
             where TViewModel : IBaseViewModel<TNavData>
         {
-            return PushAsync<TViewModel, TNavData>(navData, modal, false, animated);
-        }
-
-        public Task PushWithNewNavigationAsync<TViewModel>(bool modal = false, bool animated = true)
-            where TViewModel : IBaseViewModel
-        {
-            return PushAsync<TViewModel>(modal, true, animated);
-        }
-
-        public Task PushWithNewNavigationAsync<TViewModel, TNavData>(TNavData navData, bool modal = false,
-            bool animated = true) where TViewModel : IBaseViewModel<TNavData>
-        {
-            return PushAsync<TViewModel, TNavData>(navData, modal, true, animated);
+            return InternalPushAsync<TViewModel, TNavData>(navData, newNavigation, false, animated);
         }
 
         public Task PopAsync(bool modal = false, bool animated = true)
@@ -96,7 +86,40 @@ namespace SkeletonMvvm
             return currentNavigation.PopAsync(animated);
         }
 
-        private async Task PushAsync<TViewModel>(bool modal,
+        public void SetAsRoot<TViewModel>(bool newNavigation = false) where TViewModel : IBaseViewModel
+        {
+            if (Application.Current == null)
+            {
+                throw new Exception("Application.Current is null");
+            }
+
+            var page = _pageResolver.ResolvePage<TViewModel>();
+            if (newNavigation)
+            {
+                page = new NavigationPage(page);
+            }
+
+            Application.Current.MainPage = page;
+        }
+
+        public void SetAsRoot<TViewModel, TNavData>(TNavData navData, bool newNavigation = false)
+            where TViewModel : IBaseViewModel<TNavData>
+        {
+            if (Application.Current == null)
+            {
+                throw new Exception("Application.Current is null");
+            }
+
+            var page = _pageResolver.ResolvePage<TViewModel, TNavData>(navData);
+            if (newNavigation)
+            {
+                page = new NavigationPage(page);
+            }
+
+            Application.Current.MainPage = page;
+        }
+
+        private async Task InternalPushAsync<TViewModel>(bool modal,
             bool newNavigation, bool animated)
             where TViewModel : IBaseViewModel
         {
@@ -105,11 +128,11 @@ namespace SkeletonMvvm
             await PushPage(page, modal, newNavigation, animated);
         }
 
-        private async Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal,
+        private async Task InternalPushAsync<TViewModel, TNavData>(TNavData navData, bool modal,
             bool newNavigation, bool animated)
             where TViewModel : IBaseViewModel<TNavData>
         {
-            var page = _pageResolver.ResolvePage<TViewModel>();
+            var page = _pageResolver.ResolvePage<TViewModel, TNavData>(navData);
 
             await PushPage(page, modal, newNavigation, animated);
         }
@@ -132,7 +155,7 @@ namespace SkeletonMvvm
             }
         }
 
-        public Page GetCurrentPage()
+        private Page GetCurrentPage()
         {
             var root = Application.Current.MainPage;
             var modalStack = root.Navigation.ModalStack;
@@ -145,7 +168,7 @@ namespace SkeletonMvvm
             return FindTopPage(root);
         }
 
-        public Page FindTopPage(Page page)
+        private Page FindTopPage(Page page)
         {
             var navigationPage = page as NavigationPage;
             if (navigationPage != null)

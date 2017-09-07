@@ -4,16 +4,10 @@ namespace SkeletonMvvm
 {
     public interface INavigationService
     {
-        Task PushAsync<TViewModel>(bool modal = false, bool animated = true)
+        Task PushAsync<TViewModel>(bool modal = false, bool newNavigation = false, bool animated = true)
             where TViewModel : IBaseViewModel;
 
-        Task PushAsync<TViewModel, TNavData>(TNavData navData, bool modal = false, bool animated = true)
-            where TViewModel : IBaseViewModel<TNavData>;
-
-        Task PushWithNewNavigationAsync<TViewModel>(bool modal = false, bool animated = true)
-            where TViewModel : IBaseViewModel;
-
-        Task PushWithNewNavigationAsync<TViewModel, TNavData>(TNavData navData, bool modal = false,
+        Task PushAsync<TViewModel, TNavData>(TNavData navData, bool newNavigation = false, bool modal = false,
             bool animated = true)
             where TViewModel : IBaseViewModel<TNavData>;
 
@@ -22,5 +16,11 @@ namespace SkeletonMvvm
         Task PopToRootAsync(bool animated = true);
 
         Task TryPopToAsync<TViewModel>(bool animated = true);
+
+        void SetAsRoot<TViewModel>(bool newNavigation = false)
+            where TViewModel : IBaseViewModel;
+
+        void SetAsRoot<TViewModel, TNavData>(TNavData navData, bool newNavigation = false)
+            where TViewModel : IBaseViewModel<TNavData>;
     }
 }

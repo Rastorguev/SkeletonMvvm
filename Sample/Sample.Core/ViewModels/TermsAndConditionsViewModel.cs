@@ -17,12 +17,12 @@ namespace Sample.Core.ViewModels
         public string Title { get; } = "Terms and Conditions";
         public string TermsAndConditions { get; } = "Terms and Conditions";
 
-        public ICommand AcceptCommand => new Command(async () => await DoAccept());
+        public ICommand AcceptCommand => new Command(DoAccept);
         public ICommand CancelCommand => new Command(async () => await DoCancel());
 
-        private Task DoAccept()
+        private void DoAccept()
         {
-            return _navigationService.PushAsync<MainViewModel>();
+            _navigationService.SetAsRoot<MainViewModel>(newNavigation: true);
         }
 
         private Task DoCancel()

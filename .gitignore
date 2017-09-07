@@ -262,3 +262,6 @@ __pycache__/
 
 # Android Resource.Designer
 Resource.Designer.cs
+
+#Solution cleanup tool
+u-cls.exe
