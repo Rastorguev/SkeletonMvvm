@@ -1,6 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using SkeletonMvvm;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XFormsSkeleton.Framework;
 using XFormsSkeleton.ViewModels;
 
 namespace XFormsSkeleton.Views.Tabs

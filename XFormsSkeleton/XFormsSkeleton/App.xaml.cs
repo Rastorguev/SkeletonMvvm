@@ -1,5 +1,5 @@
-﻿using Xamarin.Forms;
-using XFormsSkeleton.Framework;
+﻿using SkeletonMvvm;
+using Xamarin.Forms;
 using XFormsSkeleton.ViewModels;
 using XFormsSkeleton.ViewModels.Tabs;
 
@@ -11,7 +11,7 @@ namespace XFormsSkeleton
         {
             InitializeComponent();
 
-            var serviceLocator = new ServiceLocator();
+            var serviceLocator = new AutofacServiceLocator();
             serviceLocator.RegisterDependencies();
 
             var pageResolver = serviceLocator.Resolve<IPageResolver>();

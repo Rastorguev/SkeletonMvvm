@@ -38,14 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Framework\IPageResolver.cs" />
-    <Compile Include="Framework\ViewModels\IBaseViewModel.cs" />
-    <Compile Include="Framework\IServiceLocator.cs" />
-    <Compile Include="Framework\Navigation\NavigationService.cs" />
-    <Compile Include="Framework\PageResolver.cs" />
-    <Compile Include="ServiceLocator.cs" />
-    <Compile Include="Framework\ExtendedBindableObject.cs" />
-    <Compile Include="Framework\Navigation\INavigationService.cs" />
+    <Compile Include="AutofacServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MasterDetail\DetailViewModel.cs" />
     <Compile Include="ViewModels\Tabs\TabbedViewModel.cs" />
@@ -59,7 +52,6 @@
     <Compile Include="Views\SimpleView.xaml.cs">
       <DependentUpon>SimpleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Framework\ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\SimpleViewModel.cs" />
     <Compile Include="Views\Tabs\TabbedView.xaml.cs">
       <DependentUpon>TabbedView.xaml</DependentUpon>
@@ -110,6 +102,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SkeletonMvvm\SkeletonMvvm.csproj">
+      <Project>{9d4ab453-a88a-4a30-93a4-2f94554dd57c}</Project>
+      <Name>SkeletonMvvm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

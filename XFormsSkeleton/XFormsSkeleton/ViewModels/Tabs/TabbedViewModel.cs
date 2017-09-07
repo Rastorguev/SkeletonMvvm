@@ -1,4 +1,4 @@
-﻿using XFormsSkeleton.Framework.ViewModels;
+﻿using SkeletonMvvm;
 
 namespace XFormsSkeleton.ViewModels.Tabs
 {

@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using SkeletonMvvm;
 using Xamarin.Forms;
-using XFormsSkeleton.Framework.Navigation;
-using XFormsSkeleton.Framework.ViewModels;
 
 namespace XFormsSkeleton.ViewModels
 {

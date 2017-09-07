@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using XFormsSkeleton.Framework.ViewModels;
+using SkeletonMvvm;
 using XFormsSkeleton.Views.MasterDetail;
 
 namespace XFormsSkeleton.ViewModels.MasterDetail

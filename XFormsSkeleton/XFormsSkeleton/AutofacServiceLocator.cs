@@ -1,12 +1,11 @@
 using System;
 using Autofac;
 using Autofac.Features.ResolveAnything;
-using XFormsSkeleton.Framework;
-using XFormsSkeleton.Framework.Navigation;
+using SkeletonMvvm;
 
 namespace XFormsSkeleton
 {
-    public class ServiceLocator : IServiceLocator
+    public class AutofacServiceLocator : IServiceLocator
     {
         private static IContainer _container;
 
