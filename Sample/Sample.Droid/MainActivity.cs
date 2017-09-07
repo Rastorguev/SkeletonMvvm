@@ -6,9 +6,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Resource = Sample.Droid.Resource;
 
-namespace XFormsSkeleton.Droid
+namespace Sample.Droid
 {
-    [Activity(Label = "XFormsSkeleton", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true,
+    [Activity(Label = "Sample.Droid", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
     {
