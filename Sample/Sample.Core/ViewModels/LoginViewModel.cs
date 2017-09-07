@@ -14,9 +14,13 @@ namespace XFormsSkeleton.ViewModels
             _navigationService = navigationService;
         }
 
-        public ICommand LoginCommand => new Command(async () => await Login());
+        public string Login { get; set; }
 
-        private Task Login()
+        public string Password { get; set; }
+
+        public ICommand LoginCommand => new Command(async () => await PerformLogin());
+
+        private Task PerformLogin()
         {
             return _navigationService.PushAsync<MainViewModel>();
         }

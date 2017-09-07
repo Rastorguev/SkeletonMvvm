@@ -10,9 +10,12 @@
             VerticalOptions="Center"
             HorizontalOptions="FillAndExpand">
             <Entry
-                Placeholder="Login" />
+                Placeholder="Login"
+                Text="{Binding Login}" />
             <Entry
-                Placeholder="Password" />
+                Placeholder="Password"
+                Text="{Binding Password}"
+                IsPassword="True" />
             <Button
                 Text="Login"
                 Command="{Binding LoginCommand}" />
