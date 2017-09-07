@@ -3,10 +3,11 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:Sample.Core.Styles;assembly=Sample.Core"
     x:Class="Sample.Core.Views.LoginView">
     <ContentPage.Content>
         <StackLayout
-            Padding="10, 0, 10, 0"
+            Style="{x:Static styles:Styles.LeftRightIndentContainer}"
             VerticalOptions="Center"
             HorizontalOptions="FillAndExpand">
             <Entry
