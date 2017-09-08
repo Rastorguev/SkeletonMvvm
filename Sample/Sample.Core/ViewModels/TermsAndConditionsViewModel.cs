@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using Sample.Core.ViewModels.MasterDetail;
 using SkeletonMvvm;
 using Xamarin.Forms;
 
@@ -22,7 +23,7 @@ namespace Sample.Core.ViewModels
 
         private void DoAccept()
         {
-            _navigationService.SetAsRoot<MainViewModel>(newNavigation: true);
+            _navigationService.SetAsRoot<MasterDetailViewModel>();
         }
 
         private Task DoCancel()

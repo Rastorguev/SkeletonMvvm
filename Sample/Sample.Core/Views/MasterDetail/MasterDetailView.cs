@@ -49,8 +49,8 @@ namespace Sample.Core.Views.MasterDetail
 
             switch (item.ItemType)
             {
-                case MenuItemType.Type1:
-                    page = _pageResolver.ResolvePage<AViewModel, string>("A");
+                case MenuItemType.ItemsList:
+                    page = _pageResolver.ResolvePage<ItemsListViewModel>();
                     break;
                 case MenuItemType.Type2:
                     page = _pageResolver.ResolvePage<BViewModel, string>("B");

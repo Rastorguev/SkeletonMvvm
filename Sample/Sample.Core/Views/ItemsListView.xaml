@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="clr-namespace:Sample.Core.Styles;assembly=Sample.Core"
+    x:Class="Sample.Core.Views.ItemsListView">
+    <ContentPage.Content>
+        <ListView
+            ItemsSource="{Binding Items}"
+            RowHeight="70"
+            HasUnevenRows="False">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            RowSpacing="0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{x:Static styles:Styles.LeftRightIndentContainer}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                HorizontalOptions="FillAndExpand"
+                                FontSize="Medium"
+                                Text="{Binding Title}" />
+                            <Label
+                                Grid.Row="1"
+                                HorizontalOptions="FillAndExpand"
+                                FontSize="Small"
+                                Text="{Binding Details}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

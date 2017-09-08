@@ -6,30 +6,25 @@ namespace Sample.Core.ViewModels.MasterDetail
 {
     public class MasterViewModel : IBaseViewModel
     {
-        public ObservableCollection<MenuItem> MenuItems { get; }
-
-        public MasterViewModel()
+        public ObservableCollection<MenuItem> MenuItems { get; } = new ObservableCollection<MenuItem>(new[]
         {
-            MenuItems = new ObservableCollection<MenuItem>(new[]
+            new MenuItem
             {
-                new MenuItem
-                {
-                    Title = "AView",
-                    ItemType = MenuItemType.Type1
-                },
+                Title = "Items",
+                ItemType = MenuItemType.ItemsList
+            },
 
-                new MenuItem
-                {
-                    Title = "BView",
-                    ItemType = MenuItemType.Type2
-                },
+            new MenuItem
+            {
+                Title = "BView",
+                ItemType = MenuItemType.Type2
+            },
 
-                new MenuItem
-                {
-                    Title = "CView",
-                    ItemType = MenuItemType.Type3
-                }
-            });
-        }
+            new MenuItem
+            {
+                Title = "CView",
+                ItemType = MenuItemType.Type3
+            }
+        });
     }
 }

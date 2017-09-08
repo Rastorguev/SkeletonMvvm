@@ -2,9 +2,9 @@
 
 namespace Sample.Core.Views
 {
-    public partial class TermsAndConditionsView : ContentPage
+    public partial class ItemsListView : ContentPage
     {
-        public TermsAndConditionsView()
+        public ItemsListView()
         {
             InitializeComponent();
         }

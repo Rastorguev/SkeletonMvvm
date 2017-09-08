@@ -8,7 +8,7 @@
 
     public enum MenuItemType
     {
-        Type1,
+        ItemsList,
         Type2,
         Type3
     }
