@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AutofacServiceLocator.cs" />
+    <Compile Include="IBackgroundTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Styles\Dimensions.cs" />
     <Compile Include="Styles\Styles.cs" />

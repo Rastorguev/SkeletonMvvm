@@ -5,6 +5,7 @@ namespace SkeletonMvvm
     public interface IServiceLocator
     {
         object Resolve(Type type);
+        void RegisterDependencies();
     }
 
     public static class ServiceLocatorExtensions
