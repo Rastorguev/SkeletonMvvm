@@ -22,7 +22,6 @@ namespace Sample.iOS
             }
 
             _cancellationTokenSource = new CancellationTokenSource();
-            var cancellationToken = _cancellationTokenSource.Token;
 
             _taskId = UIApplication.SharedApplication.BeginBackgroundTask(() =>
             {
@@ -36,7 +35,7 @@ namespace Sample.iOS
 
             try
             {
-                await DoWork(cancellationToken);
+                await DoWork(_cancellationTokenSource.Token);
             }
             catch (OperationCanceledException)
             {
