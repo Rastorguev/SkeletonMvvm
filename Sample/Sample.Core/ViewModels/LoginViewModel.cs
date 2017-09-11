@@ -8,10 +8,12 @@ namespace Sample.Core.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
+        private readonly IBackgroundTask _backgroundTask;
 
-        public LoginViewModel(INavigationService navigationService)
+        public LoginViewModel(INavigationService navigationService, IBackgroundTask backgroundTask)
         {
             _navigationService = navigationService;
+            _backgroundTask = backgroundTask;
         }
 
         public string Login { get; set; }
@@ -22,7 +24,17 @@ namespace Sample.Core.ViewModels
 
         private Task DoLogin()
         {
-            return _navigationService.PushAsync<TermsAndConditionsViewModel>();
+            if (!_backgroundTask.IsRunning)
+            {
+                _backgroundTask.Start();
+            }
+            else
+            {
+                _backgroundTask.Stop();
+            }
+
+            return Task.FromResult(false);
+            //return _navigationService.PushAsync<TermsAndConditionsViewModel>();
         }
     }
 }
