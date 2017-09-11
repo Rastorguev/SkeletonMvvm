@@ -20,15 +20,25 @@ namespace Sample.Core
         {
             var builder = new ContainerBuilder();
 
+            RegisterCommonDependencies(builder);
+            RegisterPlatformDependencies(builder);
+
+            _container?.Dispose();
+            _container = builder.Build();
+        }
+
+        public virtual void RegisterPlatformDependencies(ContainerBuilder builder)
+        {
+        }
+
+        private void RegisterCommonDependencies(ContainerBuilder builder)
+        {
             builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
 
             builder.RegisterType<PageResolver>().As<IPageResolver>().SingleInstance()
                 .WithParameter("serviceLocator", this);
 
             builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
-
-            _container?.Dispose();
-            _container = builder.Build();
         }
     }
 }

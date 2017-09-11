@@ -8,11 +8,11 @@ namespace Sample.Core
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceLocator serviceLocator)
         {
             InitializeComponent();
 
-            var serviceLocator = new AutofacServiceLocator();
+            //var serviceLocator = new AutofacServiceLocator();
             serviceLocator.RegisterDependencies();
 
             var pageResolver = serviceLocator.Resolve<IPageResolver>();

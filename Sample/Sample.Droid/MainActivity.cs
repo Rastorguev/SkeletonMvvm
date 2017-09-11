@@ -4,7 +4,6 @@ using Android.OS;
 using Sample.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Resource = Sample.Droid.Resource;
 
 namespace Sample.Droid
 {
@@ -20,7 +19,7 @@ namespace Sample.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
-            LoadApplication(new App());
+            LoadApplication(new App(new DroidAutofacServiceLocator()));
         }
     }
 }
